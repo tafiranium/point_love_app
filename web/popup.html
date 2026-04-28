@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Настройки VPutillity</title>
+  <script src="../app/defaultConfig.js"></script>
+  <script src="../app/classes/configManager.js"></script>
+  <script src="schema.js"></script>
+  <script src="assets/ColumnsSettings.js"></script>
+  <script src="assets/TypesSettings.js"></script>
+  <script src="assets/MoneySettings.js"></script>
+  <script src="assets/ManualSettings.js"></script>
+  <script src="assets/EngineerSettings.js"></script>
+  <script src="assets/NamesSettings.js"></script>
+  <script src="assets/MainSettings.js"></script>
+  <script src="assets/ImportExportSettings.js"></script>
+  <script src="assets/PopupManager.js"></script>
+  <script src="popup.js"></script>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <h1>⚙️ Настройки VPutillity</h1>
+  </div>
+  
+  <button class="btn btn-save-all" id="btn-save-all">💾 Сохранить всё</button>
+  
+  <div class="tabs">
+    <button class="tab active" data-tab="main">Основные</button>
+    <button class="tab" data-tab="columns">Колонки</button>
+    <button class="tab" data-tab="types">Типы</button>
+    <button class="tab" data-tab="money">Оплата</button>
+    <button class="tab" data-tab="manual">Ручные</button>
+    <button class="tab" data-tab="engineer">Инженерные</button>
+    <button class="tab" data-tab="enames">Имена</button>
+    <button class="tab" data-tab="import">Импорт</button>
+  </div>
+  
+  <div id="alert" class="alert"></div>
+  
+  <div class="tab-content-wrapper" style="position: relative;">
+  <div id="tab-main" class="tab-content active">
+    <div class="section-title">Основные параметры</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label data-name="mainSize">Размер:</label>
+        <input type="number" id="cfg-main-size" value="42">
+      </div>
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" id="cfg-shop-type" value="1">
+          <span data-name="shopType">Круглосуточный магазин</span>
+        </label>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label data-name="timeShiftStart">Начало смены:</label>
+        <input type="number" id="cfg-time-shift-start" value="10">
+      </div>
+      <div class="form-group">
+        <label data-name="timeShiftEnd">Конец смены:</label>
+        <input type="number" id="cfg-time-shift-end" value="22">
+      </div>
+    </div>
+  </div>
+  
+  <!-- Columns Settings -->
+  <div id="tab-columns" class="tab-content">
+    <div class="section-title">Пассивные колонки</div>
+    <div class="passive-columns-grid" id="passive-columns"></div>
+  </div>
+  
+  <!-- Types Settings -->
+  <div id="tab-types" class="tab-content">
+    <div class="section-title">Типы продаж</div>
+    
+    <!-- Sub-tabs for types -->
+    <div class="types-sub-tabs">
+      <button class="type-sub-tab active" data-type="buyer">Вход</button>
+      <button class="type-sub-tab" data-type="market">Маркет</button>
+      <button class="type-sub-tab" data-type="mobile">Приложение</button>
+    </div>
+    
+    <!-- Sub-tab contents -->
+    <div class="type-tab-content active" id="type-buyer">
+      <div class="type-items-list" id="buyer-sources"></div>
+      <button class="btn-add-type" data-type="buyer">+ Добавить</button>
+    </div>
+    
+    <div class="type-tab-content" id="type-market">
+      <div class="type-items-list" id="market-sources"></div>
+      <button class="btn-add-type" data-type="market">+ Добавить</button>
+    </div>
+    
+    <div class="type-tab-content" id="type-mobile">
+      <div class="type-items-list" id="mobile-sources"></div>
+      <button class="btn-add-type" data-type="mobile">+ Добавить</button>
+    </div>
+  </div>
+  
+  <!-- Money Settings -->
+  <div id="tab-money" class="tab-content">
+    <div class="section-title">Оплата - Покупка</div>
+    <div class="grid-3">
+      <div class="form-group">
+        <label data-name="payCash">Наличные:</label>
+        <input type="text" id="cfg-pay-cash" placeholder="35">
+      </div>
+      <div class="form-group">
+        <label data-name="payCard">Безнал:</label>
+        <input type="text" id="cfg-pay-card" placeholder="36
+        ">
+      </div>
+      <div class="form-group">
+        <label data-name="paySbp">СБП:</label>
+        <input type="text" id="cfg-pay-sbp" placeholder="35,36,37">
+      </div>
+    </div>
+    <div class="section-title">Оплата - Мобильное</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label data-name="mobileCash">Наличные:</label>
+        <input type="text" id="cfg-mobile-cash" placeholder="43,44">
+      </div>
+      <div class="form-group">
+        <label data-name="mobileCard">Безнал:</label>
+        <input type="text" id="cfg-mobile-card" placeholder="43,44">
+      </div>
+    </div>
+    <div class="section-title">Оплата - Возврат</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label data-name="returnCash">Наличные:</label>
+        <input type="text" id="cfg-return-cash" placeholder="41,42">
+      </div>
+      <div class="form-group">
+        <label data-name="returnCard">Безнал:</label>
+        <input type="text" id="cfg-return-card" placeholder="41,42">
+      </div>
+    </div>
+  </div>
+  
+  <!-- Manual Settings -->
+  <div id="tab-manual" class="tab-content">
+    <div class="warning-box">
+      ⚠️ Внимание! Изменение этих настроек может повлиять на корректность работы приложения.
+    </div>
+    <div class="section-title">Стоп-артикулы (не учитывать в подсчетах)</div>
+    <div class="form-group">
+      <textarea id="cfg-stop" rows="4" placeholder="0, 26702, 47586, ..."></textarea>
+    </div>
+  </div>
+  
+  <!-- Engineer Settings -->
+  <div id="tab-engineer" class="tab-content">
+    <div class="section-title">Селекторы таблиц</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label data-name="selectorMain">Main:</label>
+        <input type="text" id="cfg-selector-main" value="table#detail-view">
+      </div>
+      <div class="form-group">
+        <label data-name="selectorMone">Mone:</label>
+        <input type="text" id="cfg-selector-mone" value="table#price-detail-view">
+      </div>
+      <div class="form-group">
+        <label data-name="selectorSale">Sale:</label>
+        <input type="text" id="cfg-selector-sale" value="#yw2">
+      </div>
+      <div class="form-group">
+        <label data-name="selectorItem">Item:</label>
+        <input type="text" id="cfg-selector-item" value="#receipt-items table.items.table tbody tr">
+      </div>
+      <div class="form-group">
+        <label data-name="selectorCoun">Coun:</label>
+        <input type="text" id="cfg-selector-coun" value="div#receipt-items div.summary">
+      </div>
+      <div class="form-group">
+        <label data-name="selectorMoney">Money:</label>
+        <input type="text" id="cfg-selector-money" value="34,33,35">
+      </div>
+    </div>
+    <div class="section-title">Детали продажи</div>
+    <div class="grid-2" id="details-grid"></div>
+  </div>
+  
+  <!-- Names/Enames -->
+  <div id="tab-enames" class="tab-content">
+    <div class="section-title">Исключения для имен (шифрование Base64)</div>
+    <div class="form-group">
+      <label data-name="enamesDesc">Добавить короткие имена продавцов:</label>
+      <div id="enames-list"></div>
+      <button class="add-row-btn" id="btn-add-ename">+ Добавить</button>
+    </div>
+  </div>
+  
+  <!-- Import -->
+  <div id="tab-import" class="tab-content">
+    <div class="section-title">Экспорт/Импорт</div>
+    <div class="btn-group">
+      <button class="btn btn-success" id="btn-export">Экспорт JSON</button>
+      <button class="btn btn-primary" id="btn-import">Импорт JSON</button>
+      <input type="file" id="import-file" accept=".json" style="display:none">
+      <button class="btn btn-danger" id="btn-reset">Сброс</button>
+    </div>
+  </div>
+  </div>
+  
+  <div class="status-bar">
+    <span id="status-text">Настройки загружены</span>
+    <span id="status-version">v1.0</span>
+  </div>
+
+</body>
+</html>
