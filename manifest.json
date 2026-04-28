@@ -1,0 +1,53 @@
+{
+    "name": "VPutillity Gen 3 self-made Offline",
+    "manifest_version": 3,
+    "description": "По всем вопросам сюда -> @al_picaso",
+    "version": "4.0",
+    "icons": {
+        "16": "web/icons/icon16.png",
+        "48": "web/icons/icon48.png",
+        "128": "web/icons/icon128.png"
+    },
+    "action": {
+        "default_popup": "web/popup.html",
+        "default_icon": {
+            "16": "web/icons/icon16.png",
+            "48": "web/icons/icon48.png",
+            "128": "web/icons/icon128.png"
+        }
+    },
+    "content_scripts": [{
+        "world": "MAIN",
+        "matches": [
+            "https://tl.myvirtualpos.ru/console/*",
+            "https://tl.myvirtualpos.ru/cpanel/console?path=/*"
+        ],
+        "js": [
+            "app/defaultConfig.js",
+            "app/classes/configManager.js",
+            
+            "app/classes/assets/interface.js",
+            "app/classes/assets/no_client.js",
+            "app/classes/assets/vp_time.js",
+            "app/classes/assets/addfuncs.js",
+            "app/classes/assets/tables.js",
+            "app/classes/assets/type.js",
+            "app/classes/assets/comment.js",
+            "app/classes/assets/analys.js",
+            "app/classes/assets/copy.js",
+            "app/classes/appClass.js",
+
+            "app/classes/monitorClass.js"]
+    }],
+    "background": {
+        "service_worker": "web/background.js"
+    },
+    "permissions": [
+        "storage",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://raw.githubusercontent.com/*",
+        "https://gist.githubusercontent.com/*"
+    ]
+}
