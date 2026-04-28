@@ -6,10 +6,10 @@
 
 ---
 
-### 📦 Две версии
+### 📦 Две версии клиента
 
-- **offline developer**  
-- **online client**
+- **offline** 
+- **online**
 
 ---
 
